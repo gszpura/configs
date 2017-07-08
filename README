@@ -1,0 +1,10 @@
+
+1) vim:
+~/.vim/vimrc
++ vim-indent-object plugin in:
+~/.vim/vimrc/plugin 
+
+
+2) zsh:
+~/.zshrc
+
