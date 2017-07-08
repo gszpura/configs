@@ -10,6 +10,7 @@ set showmatch
 
 vnoremap > >gv
 vnoremap < <gv
+nnoremap - $
 
 set autoindent
 set tabstop=4
