@@ -40,4 +40,4 @@ ZSH_THEME="agnoster"
 plugins=(sudo python pip history-substring-search)
 source $ZSH/oh-my-zsh.sh
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
