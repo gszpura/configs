@@ -1,8 +1,16 @@
-# Set up the prompt
-
-#autoload -Uz promptinit
-#promptinit
-#prompt adam1
+source ~/antigen.zsh
+antigen use oh-my-zsh
+antigen bundle git
+antigen bundle pip
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle cp
+antigen bundle web-search
+antigen bundle virtualenv
+antigen bundle virtualenvwrapper
+antigen theme eendroroy/alien alien
 
 setopt histignorealldups sharehistory
 
@@ -35,9 +43,9 @@ zstyle ':completion:*' verbose true
 
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-ZSH=~/.oh-my-zsh
-ZSH_THEME="agnoster"
-plugins=(sudo python pip history-substring-search)
-source $ZSH/oh-my-zsh.sh
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+
+# manual configuration needed
+source /usr/share/autojump/autojump.sh
 alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
+alias catc='colorize'
