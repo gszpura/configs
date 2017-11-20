@@ -1,0 +1,19 @@
+sudo apt-get install git
+sudo apt-get install python-dev
+# sublime
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+sudo apt-get update
+sudo apt-get install sublime-text-installer
+# configure plugins: anaconda, tailing spaces, sftp, robot, git
+# configure .ssh/config
+# Host dev
+#   HostName 10.36.118.24
+#   User esi
+sudo apt-get install zsh
+chsh -s $(which zsh)
+curl -L git.io/antigen > ~/antigen.zsh
+# copy .zshrc
+sudo apt-get install autojump
+sudo apt-get install vim
+# configure git: user
+# configure firefox: treestyle tabs, containers

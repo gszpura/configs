@@ -49,3 +49,4 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 source /usr/share/autojump/autojump.sh
 alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
 alias catc='colorize'
+export EDITOR=vim
