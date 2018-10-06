@@ -12,6 +12,7 @@ antigen bundle virtualenv
 antigen bundle virtualenvwrapper
 antigen theme eendroroy/alien alien
 
+antigen apply
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -47,6 +48,7 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # manual configuration needed
 source /usr/share/autojump/autojump.sh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
 alias catc='colorize'
 export EDITOR=vim
