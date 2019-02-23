@@ -52,3 +52,4 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
 alias catc='colorize'
 export EDITOR=vim
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
