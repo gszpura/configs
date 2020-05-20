@@ -3,22 +3,17 @@
 ################
 sudo apt-get install curl
 sudo apt-get install git
-sudo apt-get install python-dev
-sudo apt-get install python-pip
 sudo apt-get install zsh
 sudo apt-get install autojump
 sudo apt-get install vim
 sudo apt-get install silversearcher-ag
 sudo apt-get install pcmanfm
+sudo apt-get install htop
 
 ###############
 # tools & repos
 ###############
-sudo add-apt-repository ppa:gnome-terminator/nightly-gtk3
-sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update
-sudo apt-get install sublime-text-installer
-sudo apt-get install terminator python-cairo
 
 
 
@@ -27,19 +22,26 @@ sudo apt-get install terminator python-cairo
 #######################
 
 chsh -s $(which zsh)
-curl -L git.io/antigen > ~/antigen.zsh
-# copy .zshrc from this repo to ~/
+# change in .zshrc: ZSH_THEME="pygmalion"
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+
+echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
+echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
+echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
 
 
 #####################
 # manual instructions
 #####################
 
+echo "###################"
 echo "Configure subl plugins: anaconda, tailing spaces, sftp, robot, git"
 echo "Configure .ssh/config with ssh hosts if needed"
 echo "Configure firefox plugins: treestyle tabls, containers"
 echo "Configure git user"
+echo "Check if autojump is configured in ~/.zshrc"
+echo "###################"
