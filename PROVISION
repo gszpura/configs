@@ -1,6 +1,8 @@
 ################
 # basic packages
 ################
+sudo apt-get update
+
 sudo apt-get install curl
 sudo apt-get install git
 sudo apt-get install zsh
@@ -9,12 +11,13 @@ sudo apt-get install vim
 sudo apt-get install silversearcher-ag
 sudo apt-get install pcmanfm
 sudo apt-get install htop
+sudo apt-get install fzf
 
 ###############
 # tools & repos
 ###############
-sudo apt-get update
-
+# oh-my-zsh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
 #######################
@@ -22,10 +25,11 @@ sudo apt-get update
 #######################
 
 chsh -s $(which zsh)
-# change in .zshrc: ZSH_THEME="pygmalion"
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+echo "source /usr/share/doc/fzf/examples/key-bindings.zsh" >> ~/.zshrc
+echo "source /usr/share/doc/fzf/examples/completion.zsh" >> ~/.zshrc
+echo "ZSH_THEME=\"pygmalion\"" >> ~/.zshrc
+
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
@@ -41,9 +45,9 @@ echo "export EDITOR="$VISUAL"" >> ~/.zshrc
 #####################
 
 echo "###################"
-echo "Configure subl plugins: anaconda, tailing spaces, sftp, robot, git"
+echo "Install code,pycharm"
 echo "Configure .ssh/config with ssh hosts if needed"
-echo "Configure firefox plugins: treestyle tabls, containers"
+echo "Configure firefox plugins: treestyle tabs, containers"
 echo "Configure git user"
-echo "Check if autojump is configured in ~/.zshrc"
+echo "Check if autojump is configured in ~/.zshrc, if not check apt-cache show fzf"
 echo "###################"
