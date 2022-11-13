@@ -28,18 +28,19 @@ chsh -s $(which zsh)
 
 echo "source /usr/share/doc/fzf/examples/key-bindings.zsh" >> ~/.zshrc
 echo "source /usr/share/doc/fzf/examples/completion.zsh" >> ~/.zshrc
+echo "source /usr/share/autojump/autojump.sh" >> ~/.zshrc
 echo "ZSH_THEME=\"pygmalion\"" >> ~/.zshrc
+echo "export VISUAL=vim" >> ~/.zshrc
+echo "export EDITOR=vim" >> ~/.zshrc
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
 echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
-echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
-echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
-# might be also source /home/greg/.local/bin/virtualenvwrapper.sh
-echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
-echo "source /usr/share/autojump/autojump.sh" >> ~/.zshrc
-echo "export VISUAL=vim" >> ~/.zshrc
-echo "export EDITOR=vim" >> ~/.zshrc
+
+#echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
+#echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
+#echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
+#^^^^^ might be also source /home/greg/.local/bin/virtualenvwrapper.sh
 
 
 #####################
