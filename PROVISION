@@ -37,7 +37,7 @@ echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
 echo "export VISUAL=vim" >> ~/.zshrc
-echo "export EDITOR="$VISUAL"" >> ~/.zshrc
+echo "export EDITOR=vim" >> ~/.zshrc
 
 
 #####################
