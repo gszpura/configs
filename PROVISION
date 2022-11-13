@@ -36,6 +36,7 @@ echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
 echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
+echo "source /usr/share/autojump/autojump.sh" >> ~/.zshrc
 echo "export VISUAL=vim" >> ~/.zshrc
 echo "export EDITOR=vim" >> ~/.zshrc
 
@@ -49,5 +50,7 @@ echo "Install code,pycharm"
 echo "Configure .ssh/config with ssh hosts if needed"
 echo "Configure firefox plugins: treestyle tabs, containers"
 echo "Configure git user"
-echo "Check if autojump is configured in ~/.zshrc, if not check apt-cache show fzf"
+echo "CHECKS:"
+echo "If autojump does not work check: apt-cache show autojump"
+echo "If fzf does not work check: apt-cache show fzf"
 echo "###################"
