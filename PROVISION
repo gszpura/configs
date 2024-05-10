@@ -5,7 +5,11 @@ sudo apt-get update
 
 sudo apt install curl git zsh autojump vim silversearcher-ag htop fzf build-essential libssl-dev libbz2-dev libsqlite3-dev libffi-dev libreadline-dev liblzma-dev
 
+sudo apt install bat
 sudo apt-get install pcmanfm
+
+# command line examples: tldr netstat
+pip3 install tldr
 
 ###############
 # tools & repos
@@ -26,6 +30,11 @@ echo "source /usr/share/autojump/autojump.sh" >> ~/.zshrc
 echo "ZSH_THEME=\"pygmalion\"" >> ~/.zshrc
 echo "export VISUAL=vim" >> ~/.zshrc
 echo "export EDITOR=vim" >> ~/.zshrc
+
+# Add to .zshrc - preview configs for FZF
+#export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always --line-range :500 {}'"
+#export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
@@ -50,3 +59,4 @@ echo "CHECKS:"
 echo "If autojump does not work check: apt-cache show autojump"
 echo "If fzf does not work check: apt-cache show fzf"
 echo "###################"
+
