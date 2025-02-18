@@ -1,0 +1,8 @@
+sudo apt install git
+
+git config --global user.name "Grzegorz Szpura"
+git config --global user.email "g.szpura@gmail.com"
+
+echo "Config OK!"
+echo "Now add over your .ssh/id_*.pub file to github/gitlab"
+
