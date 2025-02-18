@@ -1,3 +1,12 @@
+== Run
+1) First run PRE_PROVISION to configure git
+2) Then run PROVISION to set up the rest
+3) Configure manually what is not automatized
+
+== Summary
+shell: zsh + antigen + oh-my-zsh + alien
+
+Tested on Ubuntu24
 
 1) vim:
 ~/.vim/vimrc

@@ -1,49 +1,52 @@
-################
-# basic packages
-################
+##################
+# install packages
+##################
 sudo apt-get update
 
-sudo apt install curl git zsh autojump vim silversearcher-ag htop fzf build-essential libssl-dev libbz2-dev libsqlite3-dev libffi-dev libreadline-dev liblzma-dev
+# must have
+sudo apt install curl git zsh autojump vim silversearcher-ag htop fzf build-essential libssl-dev libbz2-dev libsqlite3-dev libffi-dev libreadline-dev liblzma-dev bat zsh-antigen xdotool eza colorize xbindkeys
+sudo apt install python3-pip python3-virtualenv python3-virtualenvwrapper
 
-sudo apt install bat
+# optional but can be useful
 sudo apt-get install pcmanfm
 
-# command line examples: tldr netstat
-pip3 install tldr
+# command line examples: tldr netstat, won't work with Ubuntu 24+
+# pip3 install tldr
 
-###############
-# tools & repos
-###############
+#####################
+# clone tools & repos
+#####################
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-
-#######################
-# further configuration
-#######################
-
 chsh -s $(which zsh)
 
-echo "source /usr/share/doc/fzf/examples/key-bindings.zsh" >> ~/.zshrc
-echo "source /usr/share/doc/fzf/examples/completion.zsh" >> ~/.zshrc
-echo "source /usr/share/autojump/autojump.sh" >> ~/.zshrc
-echo "ZSH_THEME=\"pygmalion\"" >> ~/.zshrc
-echo "export VISUAL=vim" >> ~/.zshrc
-echo "export EDITOR=vim" >> ~/.zshrc
-
-# Add to .zshrc - preview configs for FZF
-#export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always --line-range :500 {}'"
-#export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
-
-
+# Autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
 
-echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
+# Antigen
+curl -L git.io/antigen > antigen.zsh
 
-#echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.zshrc
-#echo "export WORKON_HOME=~/.virtualenvs" >> ~/.zshrc
-#echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.zshrc
-#^^^^^ might be also source /home/greg/.local/bin/virtualenvwrapper.sh
+# My configs
+git clone git@github.com:gszpura/configs.git ~/src/configs
+
+# use fine-tunned zshrc
+cp ~/src/configs/zshrc ~/.zshrc
+
+# my keybindings
+cp ~/src/configs/xbindkeysrc ~/.xbindkeysrc
+killall xbindkeys
+xbindkeys
+
+############################
+# fonts: powerline/nerdfonts
+# ##########################
+
+mkdir -p ~/.local/share/fonts
+cd ~/.local/share/fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+unzip FiraCode.zip -d ~/.local/share/fonts
+fc-cache -fv  # Refresh font cache
 
 
 #####################
@@ -52,10 +55,10 @@ echo "source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 
 echo "###################"
 echo "Install code,pycharm"
-echo "Configure .ssh/config with ssh hosts if needed"
 echo "Configure firefox plugins: treestyle tabs, containers"
-echo "Configure git user"
-echo "CHECKS:"
+echo "Configure shortcuts: CTRL+ALT+P for browser, CTRL+ALT+O for browser display"
+
+echo "TROUBLESHOOTING:"
 echo "If autojump does not work check: apt-cache show autojump"
 echo "If fzf does not work check: apt-cache show fzf"
 echo "###################"

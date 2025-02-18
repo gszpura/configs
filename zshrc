@@ -46,10 +46,25 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 
-# manual configuration needed
+# sources
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
 source /usr/share/autojump/autojump.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /home/greg/.local/bin/virtualenvwrapper.sh
+
+# visual configs
+export EDITOR=vim
+export VISUAL=vim
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+export FZF_CTRL_T_OPTS="--preview 'batcat -n --color=always --line-range :500 {}'"
+
+# tools config
+export WORKON_HOME=~/Envs
+export PATH=$PATH:/home/greg/src/configs/scripts
+export PATH=$PATH:/home/greg/programy/pycharm-community-2024.3.2/bin
+
+# aliases
 alias here='a="cp -R "; a+=`xclip -selection clipboard -o`; a+=" ."; eval $a'
 alias catc='colorize'
-export EDITOR=vim
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
