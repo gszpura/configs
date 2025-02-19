@@ -31,12 +31,16 @@ curl -L git.io/antigen > antigen.zsh
 git clone git@github.com:gszpura/configs.git ~/src/configs
 
 # use fine-tunned zshrc
-cp ~/src/configs/zshrc ~/.zshrc
+cp ~/src/configs/conf_files/zshrc ~/.zshrc
 
 # my keybindings
-cp ~/src/configs/xbindkeysrc ~/.xbindkeysrc
+cp ~/src/configs/conf_files/xbindkeysrc ~/.xbindkeysrc
 killall xbindkeys
 xbindkeys
+
+# pycharm desktop entry (for Ubuntu search)
+cp ~/src/configs/conf_files/pycharm.desktop ~/.local/share/applications/
+
 
 ############################
 # fonts: powerline/nerdfonts
@@ -54,7 +58,7 @@ fc-cache -fv  # Refresh font cache
 #####################
 
 echo "###################"
-echo "Install code,pycharm"
+echo "Install pycharm: download and copy over to /home/greg/programy/pycharm/ to match desktop entry."
 echo "Configure firefox plugins: treestyle tabs, containers"
 echo "Configure shortcuts: CTRL+ALT+P for browser, CTRL+ALT+O for browser display"
 
