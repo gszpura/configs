@@ -51,7 +51,14 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 source /usr/share/doc/fzf/examples/completion.zsh
 source /usr/share/autojump/autojump.sh
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /home/greg/.local/bin/virtualenvwrapper.sh
+# virtualenvwrapper.sh location varies by install method (apt vs pip)
+for _vw in \
+    /usr/share/virtualenvwrapper/virtualenvwrapper.sh \
+    "$HOME/.local/bin/virtualenvwrapper.sh" \
+    /usr/local/bin/virtualenvwrapper.sh; do
+    [[ -f "$_vw" ]] && { source "$_vw"; break; }
+done
+unset _vw
 
 # visual configs
 export EDITOR=vim

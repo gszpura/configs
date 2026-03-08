@@ -1,0 +1,111 @@
+# =============================================================================
+# tools.list — Declarative provisioning tool definitions
+# =============================================================================
+#
+# FORMAT (pipe-delimited, 7 columns):
+#   type | name | source | check | description | depends | options
+#
+# TYPES:
+#   apt     Install via apt-get (source = package name)
+#   snap    Install via snap    (source = package name)
+#   github  Git clone from GitHub (source = "user/repo")
+#   url     Download a file from a URL
+#   script  Download and execute a shell script
+#   manual  Cannot be automated — displayed as a manual step at the end
+#
+# CHECK  (how to verify the tool is already present; skip install if true):
+#   -              Use the default check for this type:
+#                    apt    → dpkg -s <source>
+#                    snap   → snap list <name>
+#                    github → directory from 'dir:' option exists
+#                    url    → file from 'save:' option exists
+#                    script → always attempt (use path: or cmd: override)
+#   cmd:<shell>    Run a shell expression; exit 0 = already installed
+#   path:<path>    Check if a file or directory exists (~ is expanded)
+#
+# DEPENDS (comma-separated tool names):
+#   Listed tools must appear BEFORE this entry in the file.
+#   If a dependency failed, this tool is skipped automatically.
+#
+# OPTIONS (semicolon-separated key:value pairs):
+#   dir:<path>     github: clone destination   (default: ~/<repo-name>)
+#   save:<path>    url:    destination file path
+#   extract:<path> url:    unzip downloaded file into this directory
+#   env:<K=V ...>  script: space-separated environment variables to prepend
+#   args:<flags>   apt/snap/script: extra arguments for the install command
+#   post:<cmd>     any type: shell command to run after successful install
+#
+# ORDERING: Tools are processed top-to-bottom. Place dependencies first.
+# =============================================================================
+
+
+# --- Core prerequisites (no dependencies) ------------------------------------
+apt | curl        | curl              | -                          | HTTP client and file downloader                     | |
+apt | wget        | wget              | -                          | Alternative file downloader                         | |
+apt | git         | git               | -                          | Version control system                              | |
+apt | unzip       | unzip             | -                          | ZIP archive extractor                               | |
+apt | xclip       | xclip             | -                          | Clipboard command-line tool                         | |
+
+# --- Shell -------------------------------------------------------------------
+apt | zsh         | zsh               | -                          | Z shell — powerful bash alternative                 | |
+apt | autojump    | autojump          | -                          | Fast directory navigation via 'j' command           | zsh |
+apt | zsh-antigen | zsh-antigen       | -                          | Zsh plugin manager (apt package)                    | zsh |
+
+# --- Editors, search & file tools --------------------------------------------
+apt | vim         | vim               | -                          | Classic terminal text editor                        | |
+apt | ag          | silversearcher-ag | cmd:which ag               | Fast code/text search (ag command)                  | |
+apt | rg          | ripgrep           | cmd:which rg               | Fast code/text search — ripgrep (rg command)        | |
+apt | bat         | bat               | cmd:which batcat           | Syntax-highlighted cat (binary is 'batcat' on Ubuntu) | |
+apt | fzf         | fzf               | -                          | Fuzzy finder for files, history and more            | |
+apt | eza         | eza               | -                          | Modern ls replacement with colors and icons         | |
+apt | pcmanfm     | pcmanfm           | -                          | Lightweight graphical file manager                  | |
+
+# --- System & desktop tools --------------------------------------------------
+apt | htop        | htop              | -                          | Interactive process and resource monitor            | |
+apt | xdotool     | xdotool           | -                          | X11 keyboard and mouse automation                   | |
+apt | xbindkeys   | xbindkeys         | -                          | Custom keyboard shortcut manager                    | |
+apt | colorize    | colorize          | -                          | Syntax colorizer for terminal output                | |
+apt | tilix       | tilix             | -                          | Tiling terminal emulator                            | |
+
+# --- Build tools & Python dev headers (needed to compile Python etc.) --------
+apt | build-essential | build-essential | -                        | GCC, make and essential C/C++ build tools           | |
+apt | libssl-dev  | libssl-dev        | -                          | OpenSSL development headers                         | |
+apt | libbz2-dev  | libbz2-dev        | -                          | bzip2 compression development headers               | |
+apt | libsqlite3-dev | libsqlite3-dev | -                          | SQLite3 development headers                         | |
+apt | libffi-dev  | libffi-dev        | -                          | Foreign Function Interface development headers      | |
+apt | libreadline-dev | libreadline-dev | -                        | GNU Readline development headers                    | |
+apt | liblzma-dev | liblzma-dev       | -                          | LZMA/XZ compression development headers             | |
+
+# --- Python ------------------------------------------------------------------
+apt | python3-pip        | python3-pip               | -          | Python 3 package installer (pip3)                   | |
+apt | python3-virtualenv | python3-virtualenv        | -          | Python 3 virtual environment tool                   | |
+apt | python3-virtualenvwrapper | python3-virtualenvwrapper | -   | Convenient virtualenv commands: workon, mkvirtualenv | |
+
+# --- Zsh ecosystem (requires zsh + git to be installed first) ----------------
+
+# oh-my-zsh: the install script overwrites ~/.zshrc — our custom zshrc is
+# copied AFTER all tools are installed (see setup_configs in provision.sh).
+# RUNZSH=no  → don't exec zsh at the end (would pause the script)
+# CHSH=no    → don't change the default shell (we do it explicitly later)
+script | oh-my-zsh | https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh | path:~/.oh-my-zsh | Oh My Zsh framework and plugin manager | zsh,git | env:RUNZSH=no CHSH=no
+
+# Fish-style autosuggestions plugin for zsh
+github | zsh-autosuggestions | zsh-users/zsh-autosuggestions | path:~/.zsh/zsh-autosuggestions | Fish-like command autosuggestions for zsh | zsh,git | dir:~/.zsh/zsh-autosuggestions
+
+# Antigen plugin manager — sourced directly from ~/antigen.zsh in zshrc
+# Note: git.io/antigen is deprecated; use the direct GitHub raw URL below
+url | antigen | https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh | path:~/antigen.zsh | Antigen zsh plugin manager (sourced as ~/antigen.zsh) | zsh | save:~/antigen.zsh
+
+# --- Fonts -------------------------------------------------------------------
+
+# Powerline patched fonts — provides "Ubuntu Mono for Powerline" and others.
+# Required for the alien oh-my-zsh theme to render segment arrows correctly.
+# The apt package (fonts-powerline) only ships the raw symbols font; the
+# patched monospace fonts live in this GitHub repo.
+# Check: "Ubuntu Mono derivative Powerline" present in fontconfig index.
+github | powerline-fonts | powerline/fonts | cmd:fc-list | grep -q "for Powerline" | Powerline-patched monospace fonts (Ubuntu Mono for Powerline etc.) | git | dir:/tmp/powerline-fonts;post:/tmp/powerline-fonts/install.sh
+
+# --- Manual steps (cannot be fully automated) --------------------------------
+manual | pycharm | https://www.jetbrains.com/pycharm/download/ | - | Download PyCharm and extract to ~/programy/pycharm/ (required for pycharm.desktop entry) | |
+manual | firefox-plugins | - | - | Configure Firefox plugins: Tree Style Tabs, Multi-Account Containers | |
+manual | ssh-key | https://github.com/settings/keys | - | Add your SSH public key (~/.ssh/id_*.pub) to GitHub/GitLab | |
