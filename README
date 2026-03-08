@@ -1,19 +1,34 @@
-== Run
-1) First run PRE_PROVISION to configure git
-2) Then run PROVISION to set up the rest
-3) Configure manually what is not automatized
+== Setup
 
-== Summary
-shell: zsh + antigen + oh-my-zsh + alien
+Prerequisites: install git, clone this repo, then run:
 
-Tested on Ubuntu24
+  bash provision.sh          # full setup
+  bash provision.sh --status # check what's installed
 
-1) vim:
-~/.vim/vimrc
-+ vim-indent-object plugin in:
-~/.vim/vimrc/plugin 
+For Firefox extensions (Tree Style Tab, uBlock Origin):
 
+  bash firefox_setup.sh
 
-2) zsh:
-~/.zshrc
+Tested on Ubuntu 24.04
 
+== What gets installed
+
+Shell:   zsh + oh-my-zsh + antigen + alien theme
+Prompt:  powerline fonts (Ubuntu Mono for Powerline)
+Tools:   fzf, eza, bat, rg, ag, autojump, vim, htop, xbindkeys
+Python:  pip, virtualenv, virtualenvwrapper
+Desktop: tilix (default terminal, dark mode), xbindkeys, pcmanfm
+Configs: ~/.zshrc, ~/.xbindkeysrc, ~/.local/share/applications/pycharm.desktop
+
+== Adding tools
+
+Edit tools.list — each line defines one tool:
+  type | name | source | check | description | depends | options
+
+Supported types: apt, snap, github, url, script, manual
+
+== Manual steps (after running scripts)
+
+- Install PyCharm to ~/programy/pycharm/ (matches pycharm.desktop entry)
+- Set terminal font to "Ubuntu Mono for Powerline"
+- Add SSH key to GitHub: cat ~/.ssh/id_*.pub
